@@ -19,34 +19,42 @@
       <h1>Star Wars Express</h1>
       <h3>The greatest resource in the galaxy for Star Wars statistics!</h3>
       <hr>
-      <a href="/add"><button class="btn btn-danger btn-lg"><span class="fa fa-plus"></span> Add New Character</button></a>
+      <a href="./view.html"><button class="btn btn-danger btn-lg"><span class="fa fa-home"></span>Return to Home Page</button></a>
     </div>
     <div class="row">
 
       <div class="col-12">
+       
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Role</th>
+                <th scope="col">Age</th>
+                <th scope="col">Force Points</th>
+              </tr>
+            </thead>
+            <tbody class="table-body">
 
-        <div class="card">
-          <div class="card-header">
-            <h3><strong>Characters</strong></h3>
-          </div>
-          <div class="card-body">
-            <h2 id="name"></h2>
-            <div id="stats">
-              <h3><strong>Role:</strong> <span id="role"></span></h3>
-              <h3><strong>Age:</strong> <span id="age"></span></h3>
-              <h3><strong>Force Points:</strong> <span id="force-points"></span></h3>
-            </div>
-          </div>
-        </div>
+            </tbody>
       </div>
     </div>
   </div>
 
   <script type="text/javascript">
-      $.get("/api/characters/", function(data) {
-        console.log(data);
-      });
-  </script>
+  $.get("./api/characters/", function(data) {
+          
+        for (var i = 0; i < data.length; i++){
+            var newRow = $("<tr>");
+            newRow.attr("scope", "row");
+            $(".table-body").append(newRow);        
+            $("<td>").text(data[i].name).appendTo(newRow);
+            $("<td>").text(data[i].role).appendTo(newRow);
+            $("<td>").text(data[i].age).appendTo(newRow);
+            $("<td>").text(data[i].forcePoints).appendTo(newRow);
+        }          
+  });  
+    </script>
 </body>
 
 </html>
